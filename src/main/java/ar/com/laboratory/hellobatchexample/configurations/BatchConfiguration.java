@@ -1,6 +1,7 @@
 package ar.com.laboratory.hellobatchexample.configurations;
 
 
+import ar.com.laboratory.hellobatchexample.tasklests.HelloTasklet;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -38,18 +39,8 @@ public class BatchConfiguration {
     @Bean
     public Step step2(){
         return steps.get("step2")
-                .tasklet(helloWorldTasklet())
+                .tasklet(new HelloTasklet())
                 .build();
-    }
-
-    private Tasklet helloWorldTasklet() {
-        return (new Tasklet() {
-            @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                System.out.println("Hello, World!");
-                return RepeatStatus.FINISHED;
-            }
-        });
     }
 
     @Bean
