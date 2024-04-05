@@ -10,8 +10,8 @@ import java.util.List;
 public class RawRowWriter extends AbstractItemStreamItemWriter {
     @Override
     public void write(List items) throws Exception {
-        items.stream().forEach(i -> System.out.println(i.toString()));
-        System.out.println(" ************ writing each chunck ***********");
+        //items.stream().forEach(i -> System.out.println(i.toString()));
+        //System.out.println(" ************ writing each chunck ***********");
     }
 }
 
