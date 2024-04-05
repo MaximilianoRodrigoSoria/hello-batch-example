@@ -1,4 +1,4 @@
-package ar.com.laboratory.hellobatchexample.controller.impl;
+package ar.com.laboratory.hellobatchexample.controllers.impl;
 
 
 import lombok.AllArgsConstructor;
