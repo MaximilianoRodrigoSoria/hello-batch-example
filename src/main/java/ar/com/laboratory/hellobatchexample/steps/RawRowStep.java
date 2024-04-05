@@ -3,6 +3,7 @@ package ar.com.laboratory.hellobatchexample.steps;
 
 import ar.com.laboratory.hellobatchexample.models.entities.RawRow;
 import ar.com.laboratory.hellobatchexample.processor.InMemoryProcessor;
+import ar.com.laboratory.hellobatchexample.processor.RawRowProcessor;
 import ar.com.laboratory.hellobatchexample.readers.InMemoryReader;
 import ar.com.laboratory.hellobatchexample.readers.RawRowsReader;
 import ar.com.laboratory.hellobatchexample.writers.InMemoryWriter;
@@ -24,11 +25,14 @@ public class RawRowStep {
 
     private RawRowWriter rawRowWriter;
 
+    private RawRowProcessor rawRowProcessor;
+
     @Bean
     public Step readRowStep(){
         return steps.get("readRowStep").
                         <RawRow,RawRow>chunk(2)
                 .reader(rawRowsReader.reader())
+                .processor(rawRowProcessor)
                 .writer(rawRowWriter)
                 .build();
     }
