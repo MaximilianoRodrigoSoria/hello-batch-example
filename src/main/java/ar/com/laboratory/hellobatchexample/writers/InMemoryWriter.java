@@ -14,3 +14,6 @@ public class InMemoryWriter  extends AbstractItemStreamItemWriter {
         System.out.println(" ************ writing each chunck ***********");
     }
 }
+
+
+

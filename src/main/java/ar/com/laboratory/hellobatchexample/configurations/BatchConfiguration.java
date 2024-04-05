@@ -24,52 +24,19 @@ import java.util.Arrays;
 public class BatchConfiguration {
 
     private JobBuilderFactory jobs;
-
-    private StepBuilderFactory steps;
-
     private HelloJobExecutionListener helloJobExecutionListener;
-
-    private InMemoryProcessor inMemeItemProcessor;
-
-    private InMemoryReader reader;
-
-    private InMemoryWriter inMemeItemWriter;
+    private Step readNumberStep;
+    private Step helloWorldStep;
 
     @Bean
-    public Step step1(){
-        return steps.get("step")
-                .<String, String>chunk(1)
-                .reader(new ListItemReader<>(Arrays.asList("Maximiliano", "Rodrigo", "Soria")))
-                .writer(list -> list.forEach(System.out::println))
-                .build();
-    }
-
-    @Bean
-    public Step step2(){
-        return steps.get("step2")
-                .tasklet(new HelloTasklet())
-                .listener(helloJobExecutionListener)
-                .build();
-    }
-
-    @Bean
-    public Job helloWordJob(){
+    public Job initialJob(){
         return jobs.get("helloWorldJob")
                 .listener(helloJobExecutionListener)
-                .start(step1())
-                .next(step2())
-                .next(step3())
+                .start(helloWorldStep)
+                .next(readNumberStep)
                 .build();
     }
 
-    @Bean
-    public Step step3(){
-        return steps.get("step3").
-                <Integer,Integer>chunk(2)
-                .reader(reader)
-                .processor(inMemeItemProcessor)
-                .writer(inMemeItemWriter)
-                .build();
-    }
+
 
 }
